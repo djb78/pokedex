@@ -15,6 +15,8 @@ type cliCommand struct {
 
 type config struct {
 	commands map[string]cliCommand 
+	next *string 
+	previous *string
 }
 
 func cleanInput(text string) []string {
@@ -37,6 +39,8 @@ func startRepl(cfg *config) {
 			continue
 		}
 		err := validCommand.callback(cfg)
-		fmt.Println(err)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 }
